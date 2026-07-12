@@ -1,7 +1,5 @@
 import 'package:dalel_app/core/routes/app_router.dart';
-import 'package:dalel_app/features/splash/presentation/views/spashView.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(const MyApp());
