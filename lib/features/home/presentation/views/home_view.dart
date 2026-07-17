@@ -3,8 +3,8 @@ import 'package:dalel_app/core/utils/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SigninView extends StatelessWidget {
-  const SigninView({super.key});
+class home_view extends StatelessWidget {
+  const home_view({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,14 @@ class SigninView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              customGoNavigation(context, '/signup');
+              FirebaseAuth.instance.signOut();
+              customReplacementNavigation(context, '/signin');
             },
             icon: Icon(Icons.logout),
           ),
         ],
       ),
+      body: Center(child: Text('Home')),
     );
   }
 }

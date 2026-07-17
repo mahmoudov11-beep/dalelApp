@@ -1,8 +1,10 @@
-import 'package:dalel_app/features/home/presentation/widgets/onBoarding_widget.dart';
+
 import 'package:flutter/material.dart';
 
+import '../widgets/onBoarding_widget.dart';
+
 class onBoarding_body extends StatelessWidget {
-  onBoarding_body({super.key, required this.controller, this.onPagechanger});
+ const onBoarding_body({super.key, required this.controller, this.onPagechanger});
   final PageController controller;
   final Function(int)? onPagechanger;
   @override

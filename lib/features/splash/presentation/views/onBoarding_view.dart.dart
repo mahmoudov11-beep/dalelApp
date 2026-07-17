@@ -1,10 +1,11 @@
 import 'package:dalel_app/core/database/cache/cache_helper.dart';
 import 'package:dalel_app/core/functions/navigation.dart';
+import 'package:dalel_app/core/utils/app_colors.dart';
 import 'package:dalel_app/core/utils/app_strings.dart';
-import 'package:dalel_app/features/home/presentation/view_Model/onBoardingItems.dart';
-import 'package:dalel_app/features/home/presentation/views/custom_Button.dart';
-import 'package:dalel_app/features/home/presentation/views/onBoarding_body.dart';
-import 'package:dalel_app/features/home/presentation/widgets/onBoardingSaveData.dart';
+import 'package:dalel_app/features/splash/presentation/view_Model/onBoardingItems.dart';
+import 'package:dalel_app/features/splash/presentation/views/onBoardingbody.dart';
+import 'package:dalel_app/features/splash/presentation/views/custom_Button.dart';
+import 'package:dalel_app/features/splash/presentation/widgets/onBoardingSaveData.dart';
 import 'package:dalel_app/main.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _onBoardingState extends State<onBoarding> {
                 alignment: AlignmentGeometry.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    customNavigation(context, '/signup');
+                    customReplacementNavigation(context, '/signup');
                     onBoardingSaveData();
                   },
                   child: Text(AppStrings.skip),
@@ -52,10 +53,11 @@ class _onBoardingState extends State<onBoarding> {
                       children: [
                         SizedBox(height: 10),
                         custom_Button(
+                          color: AppColors.PrimaryColor,
                           text: AppStrings.signUp,
                           onPressed: () {
                             onBoardingSaveData();
-                            customNavigation(context, '/signup');
+                            customReplacementNavigation(context, '/signup');
                           },
                         ),
                         SizedBox(height: 20),
@@ -63,13 +65,14 @@ class _onBoardingState extends State<onBoarding> {
                           child: Text('Sign in now'),
                           onTap: () {
                             onBoardingSaveData();
-                            customNavigation(context, '/signin');
+                            customReplacementNavigation(context, '/signin');
                           },
                         ),
                       ],
                     )
                   : custom_Button(
                       text: AppStrings.next,
+                      color: AppColors.PrimaryColor,
                       onPressed: () {
                         controller.nextPage(
                           duration: Duration(milliseconds: 200),

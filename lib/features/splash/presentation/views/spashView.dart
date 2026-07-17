@@ -3,6 +3,7 @@ import 'package:dalel_app/core/database/cache/cache_helper.dart';
 import 'package:dalel_app/core/functions/navigation.dart';
 import 'package:dalel_app/core/utils/app_strings.dart';
 import 'package:dalel_app/core/utils/app_text_styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class splashView extends StatefulWidget {
@@ -18,7 +19,9 @@ class _splashViewState extends State<splashView> {
     bool isOnboardingVisited =
         getIt<CacheHelper>().getData(key: "onBoardingVisited") ?? false;
     if (isOnboardingVisited == true) {
-      delayedNavigator(context, '/signin');
+      FirebaseAuth.instance.currentUser == null
+          ? delayedNavigator(context, '/signup')
+          : delayedNavigator(context, '/signin');
     } else {
       delayedNavigator(context, '/homeview');
     }

@@ -3,7 +3,7 @@ import 'package:dalel_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class custom_Button extends StatelessWidget {
-  const custom_Button({
+  custom_Button({
     super.key,
     this.color,
     this.width,
@@ -27,7 +27,7 @@ class custom_Button extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: Text(text, style: custom_text_styles.PoppinsStyleLight),
+        child: Text(text, style: custom_text_styles.PoppinsStyleLightSize18),
       ),
     );
   }
