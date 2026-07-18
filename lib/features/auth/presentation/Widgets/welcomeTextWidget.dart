@@ -5,13 +5,13 @@ import 'package:dalel_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class welcomeTextWidget extends StatelessWidget {
-  const welcomeTextWidget({super.key});
-
+  const welcomeTextWidget({super.key, required this.text});
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Text(
       textAlign: TextAlign.center,
-      AppStrings.welcome,
+      text,
       style: custom_text_styles.PoppinsStyle400Size28,
     );
   }

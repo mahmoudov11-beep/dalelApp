@@ -1,19 +1,41 @@
-sealed class SignUpState {}
+sealed class SigningState {}
 
-final class initialState extends SignUpState {}
+final class initialState extends SigningState {}
 
-final class loadingState extends SignUpState {}
+final class loadingSignupState extends SigningState {}
 
-final class errorState extends SignUpState {
+final class errorSignupState extends SigningState {
   final String errMessage;
 
-  errorState({required this.errMessage});
+  errorSignupState({required this.errMessage});
 }
 
-final class SuccessfulState extends SignUpState {}
+final class SuccessfulSignupState extends SigningState {}
 
-final class termsAndConditionState extends SignUpState {}
+//.....................
+final class loadingSigninState extends SigningState {}
 
-final class ObsecureValueState extends SignUpState {}
+final class errorSigninState extends SigningState {
+  final String errMessage;
 
-final class LoginStatus_state extends SignUpState {}
+  errorSigninState({required this.errMessage});
+}
+
+final class SuccessfulSigninState extends SigningState {}
+
+final class loadingPassResetState extends SigningState {}
+
+final class errorPassResetState extends SigningState {
+  final String errMessage;
+
+  errorPassResetState({required this.errMessage});
+}
+
+final class SuccessfulPassResetState extends SigningState {}
+
+//.............................
+final class termsAndConditionState extends SigningState {}
+
+final class ObsecureValueState extends SigningState {}
+
+final class LoginStatus_state extends SigningState {}

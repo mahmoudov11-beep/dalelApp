@@ -2,51 +2,39 @@ import 'package:dalel_app/core/functions/navigation.dart';
 import 'package:dalel_app/core/functions/toast_function.dart';
 import 'package:dalel_app/core/utils/app_colors.dart';
 import 'package:dalel_app/core/utils/app_strings.dart';
-import 'package:dalel_app/features/auth/presentation/Widgets/checkBoxWidget.dart';
 import 'package:dalel_app/features/auth/presentation/Widgets/customTextField.dart';
+import 'package:dalel_app/features/auth/presentation/Widgets/forgetPasswordWidget.dart';
 import 'package:dalel_app/features/auth/presentation/auth_cubit/cubit/auth_cubit.dart';
 import 'package:dalel_app/features/auth/presentation/auth_cubit/cubit/auth_state.dart';
 import 'package:dalel_app/features/splash/presentation/views/custom_Button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class customTextFiledForm extends StatelessWidget {
-  const customTextFiledForm({super.key});
+class customSigninForm extends StatelessWidget {
+  const customSigninForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => authCubit(),
-      child: BlocConsumer<authCubit, SignUpState>(
+      child: BlocConsumer<authCubit, SigningState>(
         listener: (context, state) {
-          if (state is errorState) {
+          if (state is errorSigninState) {
             toaster(state.errMessage);
           }
-          if (state is SuccessfulState) {
-            toaster('Account created succefully');
-            customReplacementNavigation(context, '/home');
+          if (state is SuccessfulSigninState) {
+            FirebaseAuth.instance.currentUser!.emailVerified
+                ? customReplacementNavigation(context, '/home')
+                : toaster('Please Verify your Account');
           }
         },
         builder: (context, state) {
           authCubit auth = BlocProvider.of<authCubit>(context);
           return Form(
-            key: auth.key,
+            key: auth.Signinkey,
             child: Column(
               children: [
-                customTextFormField(
-                  text: 'First Name',
-                  onChanged: (firstName) {
-                    auth.firstName = firstName;
-                  },
-                ),
-                SizedBox(height: 30),
-                customTextFormField(
-                  text: 'Last Name',
-                  onChanged: (lastName) {
-                    auth.lastName = lastName;
-                  },
-                ),
-                SizedBox(height: 30),
                 customTextFormField(
                   text: 'Email',
                   onChanged: (email) {
@@ -71,23 +59,24 @@ class customTextFiledForm extends StatelessWidget {
                     auth.password = password;
                   },
                 ),
-
-                checkBoxWidget(),
+                Padding(
+                  padding: EdgeInsetsGeometry.only(right: 16),
+                  child: forgetPasswordWidget(),
+                ),
                 SizedBox(height: 150),
-                state is loadingState
+                state is loadingSigninState
                     ? CircularProgressIndicator(color: AppColors.PrimaryColor)
-                    : custom_Button(
-                        onPressed: () {
-                          if (auth.termsAndConditionValue == true) {
-                            if (auth.key.currentState!.validate()) {
-                              auth.signUpwithemailAndPassword();
+                    : Padding(
+                        padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
+                        child: custom_Button(
+                          onPressed: () async {
+                            if (auth.Signinkey.currentState!.validate()) {
+                              await auth.signinWithEmailAndPassword();
                             }
-                          }
-                        },
-                        text: AppStrings.signUp,
-                        color: auth.termsAndConditionValue == false
-                            ? AppColors.grey
-                            : null,
+                          },
+                          text: AppStrings.signIn,
+                          color: AppColors.PrimaryColor,
+                        ),
                       ),
               ],
             ),

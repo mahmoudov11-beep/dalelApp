@@ -41,6 +41,7 @@ dependencies:
   firebase_core: ^4.12.1
   firebase_auth: ^6.5.6
   fluttertoast: ^9.1.0
+  cloud_firestore: ^6.7.1
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +49,8 @@ dev_dependencies:
   go_router: ^17.3.0
   flutter_native_splash: ^2.4.8
   smooth_page_indicator: ^2.0.1
+  
+  flutter_svg: ^2.3.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -91,6 +94,10 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
+
+    - family: Saira
+      fonts:
+        - asset: assets/fonts/Saira_Condensed-Regular.ttf
        
   #
   # For details regarding fonts from package dependencies,
